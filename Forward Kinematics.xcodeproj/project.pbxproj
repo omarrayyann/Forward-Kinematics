@@ -41,7 +41,7 @@
 		45C5E5D327438E240071B47E = {
 			isa = PBXGroup;
 			children = (
-				45C5E5DE27438E240071B47E /* Forard Kinematics */,
+				45C5E5DF27438E240071B47E /* main.cpp */,
 				45C5E5DD27438E240071B47E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,14 +52,6 @@
 				45C5E5DC27438E240071B47E /* Forward Kinematics */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		45C5E5DE27438E240071B47E /* Forard Kinematics */ = {
-			isa = PBXGroup;
-			children = (
-				45C5E5DF27438E240071B47E /* main.cpp */,
-			);
-			path = "Forard Kinematics";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
