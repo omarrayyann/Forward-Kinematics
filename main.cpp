@@ -128,16 +128,13 @@ public:
     }
     /* non-defult constructors */
     // has a parent
-    Segment(Segment *parent, double l, Angle a){
+    Segment(Segment &parent, double l, Angle a){
         rootSegment = false;
-        startPoint = parent->getEndPoint();
         length = l;
         angleRelativeToParentSegment = a;
         rootSegment = false;
-        parentSegment = parent;
-        updateAngleOfElevation();
-        updateEndPoint();
-        
+        parentSegment = &parent;
+        updateSegment();
     }
     // no parent (root)
     Segment(Point start, double l, Angle a){
@@ -145,8 +142,8 @@ public:
         startPoint = start;
         length = l;
         angleRelativeToParentSegment = a;
-        angleOfElevation = a;
-        updateEndPoint();
+        parentSegment = NULL;
+        updateSegment();
     }
     /* Getters */
     // Get Start Point
@@ -170,31 +167,31 @@ public:
         return angleOfElevation;
     }
     // Get ParentSegment
-    Segment getParentSegment(){
-        return *parentSegment;
+    Segment* getParentSegment(){
+        return parentSegment;
     }
     /* Setters */
     // Set Start Point
     void setStartPoint(Point point){
         startPoint = point;
-        updateAngleOfElevation();
-        updateEndPoint();
+        updateSegment();
+
     }
     // Set Length
     void setLength(double l){
         length = l;
-        updateAngleOfElevation();
-        updateEndPoint();
+        updateSegment();
+
     }
     // Set Angle
     void setAngleRelativeToParentSegment(Angle a){
         angleRelativeToParentSegment = a;
-        updateAngleOfElevation();
-        updateEndPoint();
+        updateSegment();
+
     }
     // Set Parent Segment
-    void setParentSegment(Segment parent){
-        *parentSegment = parent;
+    void setParentSegment(Segment *parent){
+        parentSegment = parent;
     }
     /* Functions */
     // Print Segment Info
@@ -209,22 +206,23 @@ public:
     }
     // Update Both Angle of Elevation and End Point
     void updateSegment(){
-        updateAngleOfElevation();
-        updateEndPoint();
-    }
-    // Update Angle of Elevation
-    void updateAngleOfElevation(){
-    // Getting Angle of Elevation of Parent
-    Angle parentAngleOfElevation = parentSegment->getAngleOfElevation();
-    // Getting Angle of Elevation of Current Segment
-    angleOfElevation.setAngle(parentAngleOfElevation.getAngle() - 180 + angleRelativeToParentSegment.getAngle());
-    }
-    
-    // Update End Point
-    void updateEndPoint(){
+        if (!rootSegment){
+            // Getting Angle of Elevationx of Parent
+            Segment parent = *parentSegment;
+            Angle parentAngleOfElevation = parent.
+            getAngleOfElevation();
+            // Getting Angle of Elevation of Current Segment
+            angleOfElevation.setAngle(parentAngleOfElevation.getAngle() - 180 + angleRelativeToParentSegment.getAngle());
+            startPoint = parent.getEndPoint();
+            cout << "New Start Point" << startPoint.getCoordinate() << endl;
+        }
+        else{
+            angleOfElevation.setAngle(angleRelativeToParentSegment.getAngle());
+        }
         endPoint.setX(startPoint.getX() + length*angleOfElevation.getCos());
         endPoint.setY(startPoint.getY() + length*angleOfElevation.getSin());
     }
+  
 
     
     
@@ -234,9 +232,11 @@ public:
 class Robot{
     
 private:
-    Segment *segments = new Segment[0];
+    
     int numberOfSegments = 0;
 public:
+    Segment *segments = new Segment[0];
+
     /* Functions */
     // Add Segment
     void addRootSegment(Point start, double l, Angle a){
@@ -246,12 +246,7 @@ public:
             tempSegments[i] = segments[i];
         }
         Segment *segment;
-        if (numberOfSegments>1) {
-             segment = new Segment(&segments[numberOfSegments-2], l, a);
-        }
-        else{
-            segment = new Segment(start, l, a);
-        }
+        segment = new Segment(start, l, a);
         tempSegments[numberOfSegments-1] = *segment;
         delete [] segments;
         segments = tempSegments;
@@ -262,16 +257,14 @@ public:
         Segment *tempSegments = new Segment[numberOfSegments];
         for(int i = 0; i < numberOfSegments-1; i++){
             tempSegments[i] = segments[i];
+            if (i!=0){
+                tempSegments[i].setParentSegment(&tempSegments[i-1]);
+            }
         }
         Segment *segment;
-        if (numberOfSegments>1) {
-             segment = new Segment(&segments[numberOfSegments-2], l, a);
-        }
-        else{
-            segment = new Segment(Point(0, 0), l, a);
-        }
+        segment = new Segment(segments[numberOfSegments-2], l, a);
         tempSegments[numberOfSegments-1] = *segment;
-        delete [] segments;
+        tempSegments[numberOfSegments-1].setParentSegment(&tempSegments[numberOfSegments-2]);
         segments = tempSegments;
     }
     // Remove Segment
@@ -283,6 +276,14 @@ public:
         }
         delete [] segments;
         segments = tempSegments;
+    }
+    // Change Angle of Segment
+    void updateSegmentAngle(int n, Angle angle){
+        segments[n].setAngleRelativeToParentSegment(angle);
+        for (int i = n; i < numberOfSegments; i++){
+            segments[i].updateSegment();
+        }
+        print();
     }
     // Get Segment
     Segment getSegment(int n){
@@ -328,7 +329,7 @@ int main() {
     
     cout << "Forward Kinematics" << endl;
     while(1){
-    cout << endl << "Choose an Option to Proceed:\n1- Add Segment\n2- Delete Segment\n3- Modify a Segment Angle\n4- Modify a Segment Length\n5- Move to Defualt Position\n6- Print End Point\n6- Print Number of Segments" << endl << endl;
+    cout << endl << "Choose an Option to Proceed:\n1- Add Segment\n2- Delete Segment\n3- Modify a Segment Angle\n4- Modify a Segment Length\n5- Move to Defualt Position\n6- Print End Point\n7- Print Number of Segments\n8- Print Robot" << endl << endl;
     int choice;
     cin >> choice;
     switch (choice) {
@@ -340,14 +341,15 @@ int main() {
                 cin >> length;
                 cout << "Angle between it and the previous segment: ";
                 cin >> angle;
+                robot.addSegment(length, Angle(angle));
             }
             else{
                 cout << endl << "Parent Segment to Add\nLength: ";
                 cin >> length;
                 cout << "Angle of Elevation: ";
                 cin >> angle;
+                robot.addRootSegment(Point(0, 0) ,length, Angle(angle));
             }
-            robot.addSegment(length, Angle(angle));
             cout << "Segment was Added Successfully!" << endl;
             break;
         case 2:
@@ -367,8 +369,41 @@ int main() {
                 cout << "No segments to delete" << endl;
             }
             break;
+        case 3:
+            cout << "Enter the order of the segment you wanna change the angle of: ";
+            int choice;
+            cin >> choice;
+            choice--;
+            if (robot.getNumberOfSegments()>choice){
+                cout << "Segment #" << choice+1 << " current angle relative to previous segment: " << robot.getSegment(choice).getAngleRelativeToParentSegment().getAngle() << endl;
+                cout << "Enter new Angle: ";
+                double angle;
+                cin >> angle;
+                robot.updateSegmentAngle(choice, Angle(angle));
+                cout << "Angle was updated successfully" << endl;
+            }
+            else{
+                cout << "Segment " << choice+1 << " does not exist" << endl;
+            }
+            break;
         case 6:
-            cout << "End Point: " << robot.getEndPoint().getCoordinate() << endl;
+            if (robot.getNumberOfSegments()>0){
+                cout << "End Point: " << robot.getEndPoint().getCoordinate() << endl;}
+            else{
+                cout << "No segments available" << endl;
+            }
+            break;
+        case 7:
+            cout << "Number of Segments: " << robot.getNumberOfSegments() << endl;
+            break;
+        case 8:
+            robot.print();
+            break;
+        case 9:
+            cout << "First segment address: " << &robot.segments[0] << endl;
+            cout << "Second segment address: " << &robot.segments[1] << endl;
+
+            break;
         default:
             break;
     }
