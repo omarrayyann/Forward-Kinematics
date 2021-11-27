@@ -23,7 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		45C5E5DC27438E240071B47E /* Forward Kinematics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Forward Kinematics"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45C5E5DC27438E240071B47E /* Forward Kinematics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Forward Kinematics"; path = "/Users/omarrayyann/Desktop/NYUAD/Fall 2021/CPE/Assignments/assignment 4/Forward Kinematics/build/Debug/Forward Kinematics"; sourceTree = "<absolute>"; };
 		45C5E5DF27438E240071B47E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -42,16 +42,7 @@
 			isa = PBXGroup;
 			children = (
 				45C5E5DF27438E240071B47E /* main.cpp */,
-				45C5E5DD27438E240071B47E /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		45C5E5DD27438E240071B47E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45C5E5DC27438E240071B47E /* Forward Kinematics */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,7 +88,7 @@
 				Base,
 			);
 			mainGroup = 45C5E5D327438E240071B47E;
-			productRefGroup = 45C5E5DD27438E240071B47E /* Products */;
+			productRefGroup = 45C5E5D327438E240071B47E;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -232,9 +223,15 @@
 		45C5E5E427438E240071B47E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2UB54RR38V;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = /opt/homebrew/Cellar/glfw/3.3.5/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/glfw/3.3.5/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -242,9 +239,15 @@
 		45C5E5E527438E240071B47E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2UB54RR38V;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = /opt/homebrew/Cellar/glfw/3.3.5/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/glfw/3.3.5/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

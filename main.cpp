@@ -5,13 +5,14 @@
 
 #define PI 3.14159265
 
-
 using namespace std;
+
 
 
 class Point;
 class Robot;
 class Segment;
+
 
 class Point{
 private:
@@ -57,7 +58,7 @@ public:
         cout << "(" << x << ", " << y << ")";
     }
     // Distance from Origin
-    double disatnceFromOrigin(){
+    double distanceFromOrigin(){
         return sqrt(pow(x, 2)+pow(y, 2));
     }
 };
@@ -203,8 +204,8 @@ public:
         cout << "Angle Relative to Parent Segment: " << angleRelativeToParentSegment.getAngle() << endl;
         cout << "Angle of Elevation: " << angleOfElevation.getAngle() << endl;
         cout << "Length : " << length << endl;
-        cout << "Disatnce of Start Point from Origin : " << startPoint.disatnceFromOrigin() << endl;
-        cout << "Disatnce of End Point from Origin : " << endPoint.disatnceFromOrigin() << endl;
+        cout << "Distance of Start Point from Origin : " << startPoint.distanceFromOrigin() << endl;
+        cout << "Distance of End Point from Origin : " << endPoint.distanceFromOrigin() << endl;
     }
     // Update Both Angle of Elevation and End Point
     void updateSegment(){
@@ -283,6 +284,14 @@ public:
         delete [] segments;
         segments = tempSegments;
     }
+    // Get Segment
+    Segment getSegment(int n){
+        if (n<numberOfSegments){
+            return segments[n];}
+        else{
+            return Segment(Point(0,0), 0, Angle(0));
+        }
+    }
     void updateAllSegments(){
         
     }
@@ -294,13 +303,85 @@ public:
             cout << endl;
         }
     }
-      
-    };
+    // Get End Point
+    Point getEndPoint(){
+        return segments[numberOfSegments-1].getEndPoint();}
+  
+    // get number of segments
+    int getNumberOfSegments(){
+        return numberOfSegments;}
+};
+
+
+
+
+
+
+
+
+
+
 
 
 int main() {
     Robot robot;
-    robot.addSegment(6, Angle(60));
-    robot.addSegment(6, Angle(60));
-    robot.print();
+    
+    cout << "Forward Kinematics" << endl;
+    while(1){
+    cout << endl << "Choose an Option to Proceed:\n1- Add Segment\n2- Delete Segment\n3- Modify a Segment Angle\n4- Modify a Segment Length\n5- Move to Defualt Position\n6- Print End Point\n6- Print Number of Segments" << endl << endl;
+    int choice;
+    cin >> choice;
+    switch (choice) {
+        case 1:
+            double length;
+            double angle;
+            if (robot.getNumberOfSegments()>0){
+                cout << endl <<"Segment to Add\nLength: ";
+                cin >> length;
+                cout << "Angle between it and the previous segment: ";
+                cin >> angle;
+            }
+            else{
+                cout << endl << "Parent Segment to Add\nLength: ";
+                cin >> length;
+                cout << "Angle of Elevation: ";
+                cin >> angle;
+            }
+            robot.addSegment(length, Angle(angle));
+            cout << "Segment was Added Successfully!" << endl;
+            break;
+        case 2:
+            if (robot.getNumberOfSegments()>0){
+                Segment lastSegment = robot.getSegment(robot.getNumberOfSegments()-1);
+                cout << endl;
+                lastSegment.printInfo();
+                cout << endl << "Are you sure you want to delete the last segement with the following properties (y/n) ?";
+                string choice;
+                cin >> choice;
+                if (choice=="Y"||choice=="y"){
+                    robot.removeSegment();
+                    cout << "Segment was Removed Successfully!" << endl;
+                }
+            }
+            else{
+                cout << "No segments to delete" << endl;
+            }
+            break;
+        case 6:
+            cout << "End Point: " << robot.getEndPoint().getCoordinate() << endl;
+        default:
+            break;
+    }
+    }
+    
+    
+    
+//
+//
+//    robot.addSegment(6, Angle(60));
+//    robot.addSegment(6, Angle(60));
+//    robot.print();
+//    cout << robot.getEndPoint().getCoordinate() << endl;
+    
+    
 }
