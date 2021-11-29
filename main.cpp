@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cmath>
 
+
 #define PI 3.14159265
 
 using namespace std;
@@ -92,11 +93,11 @@ public:
     // Trigonometric Values
     // get Sine of Angle
     double getSin(){
-        return sin(angle*PI/180);
+        return  sin(angle);
     }
     // get Cosine of Angle
     double getCos(){
-        return cos(angle*PI/180);
+        return cos(angle);
     }
     // get Tangent of Angle
     double getTan(){
@@ -198,8 +199,8 @@ public:
     void printInfo(){
         cout << "Starting Point: " << startPoint.getCoordinate() << endl;
         cout << "Ending Point: " << endPoint.getCoordinate() << endl;
-        cout << "Angle Relative to Parent Segment: " << angleRelativeToParentSegment.getAngle() << endl;
-        cout << "Angle of Elevation: " << angleOfElevation.getAngle() << endl;
+        cout << "Angle Relative to Parent Segment: " << angleRelativeToParentSegment.getAngle() << " radians" << endl;
+        cout << "Angle of Elevation: " << angleOfElevation.getAngle() << " radians" << endl;
         cout << "Length : " << length << endl;
         cout << "Distance of Start Point from Origin : " << startPoint.distanceFromOrigin() << endl;
         cout << "Distance of End Point from Origin : " << endPoint.distanceFromOrigin() << endl;
@@ -212,7 +213,7 @@ public:
             Angle parentAngleOfElevation = parent.
             getAngleOfElevation();
             // Getting Angle of Elevation of Current Segment
-            angleOfElevation.setAngle(parentAngleOfElevation.getAngle() - 180 + angleRelativeToParentSegment.getAngle());
+            angleOfElevation.setAngle(parentAngleOfElevation.getAngle() - PI + angleRelativeToParentSegment.getAngle());
             startPoint = parent.getEndPoint();
             cout << "New Start Point" << startPoint.getCoordinate() << endl;
         }
@@ -285,6 +286,14 @@ public:
         }
         print();
     }
+    // Change Length of Segment
+    void updateSegmentLength(int n, double length){
+        segments[n].setLength(length);
+        for (int i = n; i < numberOfSegments; i++){
+            segments[i].updateSegment();
+        }
+        print();
+    }
     // Get Segment
     Segment getSegment(int n){
         if (n<numberOfSegments){
@@ -326,7 +335,7 @@ public:
 
 int main() {
     Robot robot;
-    
+
     cout << "Forward Kinematics" << endl;
     while(1){
     cout << endl << "Choose an Option to Proceed:\n1- Add Segment\n2- Delete Segment\n3- Modify a Segment Angle\n4- Modify a Segment Length\n5- Move to Defualt Position\n6- Print End Point\n7- Print Number of Segments\n8- Print Robot" << endl << endl;
@@ -339,14 +348,24 @@ int main() {
             if (robot.getNumberOfSegments()>0){
                 cout << endl <<"Segment to Add\nLength: ";
                 cin >> length;
-                cout << "Angle between it and the previous segment: ";
+                while (length<=0){
+                    cout << "Lenght can't be less than 0, please try again" << endl;
+                    cout << endl <<"Length: ";
+                    cin >> length;
+                }
+                cout << "Angle between it and the previous segment (radians): ";
                 cin >> angle;
+                while (angle<0){
+                    cout << "Angle can't be less than, please try again" << endl;
+                    cout << endl <<"Angle between it and the previous segment (radians): ";
+                    cin >> angle;
+                }
                 robot.addSegment(length, Angle(angle));
             }
             else{
                 cout << endl << "Parent Segment to Add\nLength: ";
                 cin >> length;
-                cout << "Angle of Elevation: ";
+                cout << "Angle of Elevation (radians): ";
                 cin >> angle;
                 robot.addRootSegment(Point(0, 0) ,length, Angle(angle));
             }
@@ -371,7 +390,6 @@ int main() {
             break;
         case 3:
             cout << "Enter the order of the segment you wanna change the angle of: ";
-            int choice;
             cin >> choice;
             choice--;
             if (robot.getNumberOfSegments()>choice){
@@ -381,6 +399,22 @@ int main() {
                 cin >> angle;
                 robot.updateSegmentAngle(choice, Angle(angle));
                 cout << "Angle was updated successfully" << endl;
+            }
+            else{
+                cout << "Segment " << choice+1 << " does not exist" << endl;
+            }
+            break;
+        case 4:
+            cout << "Enter the order of the segment you wanna change the length of: ";
+            cin >> choice;
+            choice--;
+            if (robot.getNumberOfSegments()>choice){
+                cout << "Segment #" << choice+1 << " current length: " << robot.getSegment(choice).getLength() << endl;
+                cout << "Enter new Length: ";
+                double length;
+                cin >> length;
+                robot.updateSegmentLength(choice, length);
+                cout << "Lenght was updated successfully" << endl;
             }
             else{
                 cout << "Segment " << choice+1 << " does not exist" << endl;
