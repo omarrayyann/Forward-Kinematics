@@ -23,7 +23,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		45C5E5DC27438E240071B47E /* Forward Kinematics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Forward Kinematics"; path = "/Users/omarrayyann/Desktop/NYUAD/Fall 2021/CPE/Assignments/assignment 4/Forward Kinematics/build/Debug/Forward Kinematics"; sourceTree = "<absolute>"; };
+		457A19922758227B009BFFA7 /* Forward Kinematics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Forward Kinematics"; sourceTree = BUILT_PRODUCTS_DIR; };
+		457A19932758229B009BFFA7 /* tables.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tables.hpp; path = "../../../../../../../Downloads/Tables-and-Graphs-master/tables.hpp"; sourceTree = "<group>"; };
+		457A19942758229B009BFFA7 /* graphs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = graphs.hpp; path = "../../../../../../../Downloads/Tables-and-Graphs-master/graphs.hpp"; sourceTree = "<group>"; };
+		457A19952758229F009BFFA7 /* graphs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = graphs.cpp; path = "../../../../../../../Downloads/Tables-and-Graphs-master/graphs.cpp"; sourceTree = "<group>"; };
 		45C5E5DF27438E240071B47E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -42,6 +45,10 @@
 			isa = PBXGroup;
 			children = (
 				45C5E5DF27438E240071B47E /* main.cpp */,
+				457A19922758227B009BFFA7 /* Forward Kinematics */,
+				457A19942758229B009BFFA7 /* graphs.hpp */,
+				457A19932758229B009BFFA7 /* tables.hpp */,
+				457A19952758229F009BFFA7 /* graphs.cpp */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,7 +69,7 @@
 			);
 			name = "Forward Kinematics";
 			productName = "Assignment 4";
-			productReference = 45C5E5DC27438E240071B47E /* Forward Kinematics */;
+			productReference = 457A19922758227B009BFFA7 /* Forward Kinematics */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */

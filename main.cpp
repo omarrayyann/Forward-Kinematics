@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <cmath>
-
+#include "graphs.hpp"
 
 #define PI 3.14159265
 
@@ -215,7 +215,6 @@ public:
             // Getting Angle of Elevation of Current Segment
             angleOfElevation.setAngle(parentAngleOfElevation.getAngle() - PI + angleRelativeToParentSegment.getAngle());
             startPoint = parent.getEndPoint();
-            cout << "New Start Point" << startPoint.getCoordinate() << endl;
         }
         else{
             angleOfElevation.setAngle(angleRelativeToParentSegment.getAngle());
@@ -283,9 +282,7 @@ public:
         segments[n].setAngleRelativeToParentSegment(angle);
         for (int i = n; i < numberOfSegments; i++){
             segments[i].updateSegment();
-        }
-        print();
-    }
+        }    }
     // Change Length of Segment
     void updateSegmentLength(int n, double length){
         segments[n].setLength(length);
@@ -302,8 +299,15 @@ public:
             return Segment(Point(0,0), 0, Angle(0));
         }
     }
-    void updateAllSegments(){
-        
+    void moveToDefaultPosition(){
+        for (int i = 0; i < numberOfSegments; i++){
+            if (i==0){
+                segments[i].setAngleRelativeToParentSegment(0);}
+            else{
+                segments[i].setAngleRelativeToParentSegment(PI);}
+            segments[i].updateSegment();
+        }
+        print();
     }
     // Print All Segments
     void print(){
@@ -328,21 +332,37 @@ public:
 
 
 
+double afunction(double x)
+{
+    return x + 1;
+}
+
+int main()
+{
+    size_t height =100;
+    size_t width = 100;
+
+    long double xmin = -20;
+    long double xmax = 20;
+    long double ymin = -20;
+    long double ymax = 20;
+
+    graph(height, width, xmin, xmax, ymin, ymax, afunction, graphdefaultoptions);
+    
+    return 0;
+}
 
 
 
 
-
-int main() {
+int ass() {
     Robot robot;
-
-    cout << "Forward Kinematics" << endl;
+    cout << "Forward Kinematics\n\nRobot was created successfully" << endl;
     while(1){
-    cout << endl << "Choose an Option to Proceed:\n1- Add Segment\n2- Delete Segment\n3- Modify a Segment Angle\n4- Modify a Segment Length\n5- Move to Defualt Position\n6- Print End Point\n7- Print Number of Segments\n8- Print Robot" << endl << endl;
+        cout << endl << "1- Add Segment\n2- Delete Segment\n3- Modify a Segment\n4- Move to Default Position\n5- Print End Point\n6- Print Number of Segments\n7- Print Robot\n\nChoose an Option to Proceed: " ;
     int choice;
     cin >> choice;
-    switch (choice) {
-        case 1:
+        if (choice==1){
             double length;
             double angle;
             if (robot.getNumberOfSegments()>0){
@@ -370,8 +390,8 @@ int main() {
                 robot.addRootSegment(Point(0, 0) ,length, Angle(angle));
             }
             cout << "Segment was Added Successfully!" << endl;
-            break;
-        case 2:
+        }
+        else if (choice==2){
             if (robot.getNumberOfSegments()>0){
                 Segment lastSegment = robot.getSegment(robot.getNumberOfSegments()-1);
                 cout << endl;
@@ -387,60 +407,91 @@ int main() {
             else{
                 cout << "No segments to delete" << endl;
             }
-            break;
-        case 3:
-            cout << "Enter the order of the segment you wanna change the angle of: ";
+        }
+        else if (choice==3){
+            cout << "1- Modify the angle of one segment\n2- Modify the angle of multiple segments\n3- Modify the length of one segment\n4- Modify the lenght of multiple segments\n" << endl;
             cin >> choice;
-            choice--;
-            if (robot.getNumberOfSegments()>choice){
-                cout << "Segment #" << choice+1 << " current angle relative to previous segment: " << robot.getSegment(choice).getAngleRelativeToParentSegment().getAngle() << endl;
-                cout << "Enter new Angle: ";
-                double angle;
-                cin >> angle;
-                robot.updateSegmentAngle(choice, Angle(angle));
-                cout << "Angle was updated successfully" << endl;
+            switch (choice) {
+                case 1:
+                    cout << "Enter the order of the segment you wanna change the angle of: ";
+                    cin >> choice;
+                    choice--;
+                    if (robot.getNumberOfSegments()>choice){
+                        cout << "Segment #" << choice+1 << " current angle relative to previous segment: " << robot.getSegment(choice).getAngleRelativeToParentSegment().getAngle() << endl;
+                        cout << "Enter new Angle: ";
+                        double angle;
+                        cin >> angle;
+                        robot.updateSegmentAngle(choice, Angle(angle));
+                        cout << "Angle was updated successfully" << endl;
+                    }
+                    else{
+                        cout << "Segment " << choice+1 << " does not exist" << endl;
+                    }
+                    break;
+                case 2:
+                   if (robot.getNumberOfSegments()>0){
+                        for (int i = 0; i<robot.getNumberOfSegments(); i++){
+                        cout << "Segment #" << i+1 << " current angle relative to previous segment: " << robot.getSegment(choice).getAngleRelativeToParentSegment().getAngle() << endl;
+                        cout << "Enter new Angle: ";
+                        double angle;
+                        cin >> angle;
+                        robot.updateSegmentAngle(choice, Angle(angle));
+                            cout << "Angle of segment #" << i <<  " was updated successfully" << endl;}
+                    }
+                    else{
+                        cout << "No Segments exist" << endl;
+                    }
+                    break;
+                case 3:
+                    cout << "Enter the order of the segment you wanna change the length of: ";
+                    cin >> choice;
+                    choice--;
+                    if (robot.getNumberOfSegments()>choice){
+                        cout << "Segment #" << choice+1 << " current length: " << robot.getSegment(choice).getLength() << endl;
+                        cout << "Enter new Length: ";
+                        double length;
+                        cin >> length;
+                        robot.updateSegmentLength(choice, length);
+                        cout << "Length was updated successfully" << endl;
+                    }
+                    else{
+                        cout << "Segment " << choice+1 << " does not exist" << endl;
+                    }
+                    break;
+                case 4:
+                    if (robot.getNumberOfSegments()>0){
+                         for (int i = 0; i<robot.getNumberOfSegments(); i++){
+                             cout << "Segment #" << choice+1 << " current length: " << robot.getSegment(choice).getLength() << endl;
+                             cout << "Enter new Length: ";
+                             double length;
+                             cin >> length;
+                             robot.updateSegmentLength(choice, length);
+                             cout << "Angle of length #" << i <<  " was updated successfully" << endl;}                     }
+                     else{
+                         cout << "No Segments exist" << endl;
+                     }
+                     break;
+
+                default:
+                    break;
             }
-            else{
-                cout << "Segment " << choice+1 << " does not exist" << endl;
-            }
-            break;
-        case 4:
-            cout << "Enter the order of the segment you wanna change the length of: ";
-            cin >> choice;
-            choice--;
-            if (robot.getNumberOfSegments()>choice){
-                cout << "Segment #" << choice+1 << " current length: " << robot.getSegment(choice).getLength() << endl;
-                cout << "Enter new Length: ";
-                double length;
-                cin >> length;
-                robot.updateSegmentLength(choice, length);
-                cout << "Lenght was updated successfully" << endl;
-            }
-            else{
-                cout << "Segment " << choice+1 << " does not exist" << endl;
-            }
-            break;
-        case 6:
+        }
+        else if (choice==4){
+            robot.moveToDefaultPosition();
+            cout << "Robot segments were moved to teh default position successfully" << endl;}
+        else if (choice==5){
             if (robot.getNumberOfSegments()>0){
                 cout << "End Point: " << robot.getEndPoint().getCoordinate() << endl;}
             else{
                 cout << "No segments available" << endl;
-            }
-            break;
-        case 7:
+            }}
+        else if (choice==6){
             cout << "Number of Segments: " << robot.getNumberOfSegments() << endl;
-            break;
-        case 8:
+        }
+        else if (choice==7){
             robot.print();
-            break;
-        case 9:
-            cout << "First segment address: " << &robot.segments[0] << endl;
-            cout << "Second segment address: " << &robot.segments[1] << endl;
-
-            break;
-        default:
-            break;
-    }
+        }
+    
     }
     
     
