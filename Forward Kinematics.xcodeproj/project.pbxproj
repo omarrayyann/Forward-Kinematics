@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45184C8E27584B6700485E04 /* supportLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45184C8C27584B6700485E04 /* supportLib.cpp */; };
+		45184C9127584B7300485E04 /* pbPlots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45184C8F27584B7300485E04 /* pbPlots.cpp */; };
 		45C5E5E027438E240071B47E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C5E5DF27438E240071B47E /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,10 +25,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		45184C8C27584B6700485E04 /* supportLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = supportLib.cpp; path = ../../../../../../../Downloads/supportLib.cpp; sourceTree = "<group>"; };
+		45184C8D27584B6700485E04 /* supportLib.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = supportLib.hpp; path = ../../../../../../../Downloads/supportLib.hpp; sourceTree = "<group>"; };
+		45184C8F27584B7300485E04 /* pbPlots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pbPlots.cpp; path = ../../../../../../../Downloads/pbPlots.cpp; sourceTree = "<group>"; };
+		45184C9027584B7300485E04 /* pbPlots.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = pbPlots.hpp; path = ../../../../../../../Downloads/pbPlots.hpp; sourceTree = "<group>"; };
 		457A19922758227B009BFFA7 /* Forward Kinematics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Forward Kinematics"; sourceTree = BUILT_PRODUCTS_DIR; };
-		457A19932758229B009BFFA7 /* tables.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tables.hpp; path = "../../../../../../../Downloads/Tables-and-Graphs-master/tables.hpp"; sourceTree = "<group>"; };
-		457A19942758229B009BFFA7 /* graphs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = graphs.hpp; path = "../../../../../../../Downloads/Tables-and-Graphs-master/graphs.hpp"; sourceTree = "<group>"; };
-		457A19952758229F009BFFA7 /* graphs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = graphs.cpp; path = "../../../../../../../Downloads/Tables-and-Graphs-master/graphs.cpp"; sourceTree = "<group>"; };
 		45C5E5DF27438E240071B47E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -46,9 +49,10 @@
 			children = (
 				45C5E5DF27438E240071B47E /* main.cpp */,
 				457A19922758227B009BFFA7 /* Forward Kinematics */,
-				457A19942758229B009BFFA7 /* graphs.hpp */,
-				457A19932758229B009BFFA7 /* tables.hpp */,
-				457A19952758229F009BFFA7 /* graphs.cpp */,
+				45184C8C27584B6700485E04 /* supportLib.cpp */,
+				45184C8D27584B6700485E04 /* supportLib.hpp */,
+				45184C8F27584B7300485E04 /* pbPlots.cpp */,
+				45184C9027584B7300485E04 /* pbPlots.hpp */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +114,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				45C5E5E027438E240071B47E /* main.cpp in Sources */,
+				45184C9127584B7300485E04 /* pbPlots.cpp in Sources */,
+				45184C8E27584B6700485E04 /* supportLib.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

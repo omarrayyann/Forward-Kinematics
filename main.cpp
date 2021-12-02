@@ -2,7 +2,10 @@
 
 #include <iostream>
 #include <cmath>
-#include "graphs.hpp"
+#include <string>
+#include "pbPlots.hpp"
+#include "supportLib.hpp"
+
 
 #define PI 3.14159265
 
@@ -330,32 +333,46 @@ public:
 
 
 
-
-
-double afunction(double x)
-{
-    return x + 1;
-}
-
-int main()
-{
-    size_t height =100;
-    size_t width = 100;
-
-    long double xmin = -20;
-    long double xmax = 20;
-    long double ymin = -20;
-    long double ymax = 20;
-
-    graph(height, width, xmin, xmax, ymin, ymax, afunction, graphdefaultoptions);
+void generateImage(Robot robot){
     
-    return 0;
+    
+    vector<double> x {0};
+    vector<double> y {0};
+    
+    for(int i = 0; i < robot.getNumberOfSegments(); i++){
+    
+        Segment currentSegment = robot.getSegment(i);
+        cout << currentSegment.getEndPoint().getCoordinate() << endl;
+
+        x.push_back(currentSegment.getEndPoint().getX());
+        y.push_back(currentSegment.getEndPoint().getY());
+        
+        for(int b=0; b < x.size(); b++){
+            std::cout << x.at(b) << ' ';}
+        
+        for(int b=0; b < y.size(); b++){
+            std::cout << y.at(b) << ' ';}
+
+
+    }
+    
+    RGBABitmapImageReference *imageRef = CreateRGBABitmapImageReference();
+    
+    DrawScatterPlot(imageRef, 600, 400, &x, &y);
+    
+    vector<double> *pngData = ConvertToPNG(imageRef->image);
+    
+    WriteToFile(pngData, "plot.png");
+    
+    system ("open plot.png");
+
+    DeleteImage(imageRef->image);
 }
 
 
+int main() {
 
-
-int ass() {
+    
     Robot robot;
     cout << "Forward Kinematics\n\nRobot was created successfully" << endl;
     while(1){
@@ -490,8 +507,12 @@ int ass() {
         }
         else if (choice==7){
             robot.print();
+            generateImage(robot);
+            break;
         }
-    
+        generateImage(robot);
+
+        
     }
     
     
