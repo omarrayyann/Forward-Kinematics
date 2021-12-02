@@ -335,9 +335,8 @@ public:
 
 void generateImage(Robot robot){
     
-    
-    vector<double> x {0};
     vector<double> y {0};
+    vector<double> x {0};
     
     for(int i = 0; i < robot.getNumberOfSegments(); i++){
     
@@ -355,6 +354,8 @@ void generateImage(Robot robot){
 
 
     }
+    
+    
     
     RGBABitmapImageReference *imageRef = CreateRGBABitmapImageReference();
     
