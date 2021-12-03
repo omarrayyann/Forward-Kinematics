@@ -6,17 +6,13 @@
 #include "pbPlots.hpp"
 #include "supportLib.hpp"
 
-
 #define PI 3.14159265
 
 using namespace std;
 
-
-
 class Point;
 class Robot;
 class Segment;
-
 
 class Point{
 private:
