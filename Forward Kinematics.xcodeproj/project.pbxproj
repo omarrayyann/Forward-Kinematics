@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		45184C8E27584B6700485E04 /* supportLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45184C8C27584B6700485E04 /* supportLib.cpp */; };
-		45184C9127584B7300485E04 /* pbPlots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45184C8F27584B7300485E04 /* pbPlots.cpp */; };
-		45C5E5E027438E240071B47E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C5E5DF27438E240071B47E /* main.cpp */; };
+		45B2B700275A220300D03BAF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B2B6FE275A220300D03BAF /* main.cpp */; };
+		45B2B705275A223400D03BAF /* supportLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B2B702275A223400D03BAF /* supportLib.cpp */; };
+		45B2B706275A223400D03BAF /* pbPlots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45B2B703275A223400D03BAF /* pbPlots.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,12 +25,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		45184C8C27584B6700485E04 /* supportLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = supportLib.cpp; path = ../../../../../../../Downloads/supportLib.cpp; sourceTree = "<group>"; };
-		45184C8D27584B6700485E04 /* supportLib.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = supportLib.hpp; path = ../../../../../../../Downloads/supportLib.hpp; sourceTree = "<group>"; };
-		45184C8F27584B7300485E04 /* pbPlots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pbPlots.cpp; path = ../../../../../../../Downloads/pbPlots.cpp; sourceTree = "<group>"; };
-		45184C9027584B7300485E04 /* pbPlots.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = pbPlots.hpp; path = ../../../../../../../Downloads/pbPlots.hpp; sourceTree = "<group>"; };
 		457A19922758227B009BFFA7 /* Forward Kinematics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Forward Kinematics"; sourceTree = BUILT_PRODUCTS_DIR; };
-		45C5E5DF27438E240071B47E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		45B2B6FD275A220300D03BAF /* Graphing */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Graphing; sourceTree = "<group>"; };
+		45B2B6FE275A220300D03BAF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		45B2B6FF275A220300D03BAF /* Classes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Classes; sourceTree = "<group>"; };
+		45B2B701275A223400D03BAF /* pbPlots.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pbPlots.hpp; sourceTree = "<group>"; };
+		45B2B702275A223400D03BAF /* supportLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = supportLib.cpp; sourceTree = "<group>"; };
+		45B2B703275A223400D03BAF /* pbPlots.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pbPlots.cpp; sourceTree = "<group>"; };
+		45B2B704275A223400D03BAF /* supportLib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = supportLib.hpp; sourceTree = "<group>"; };
+		45B2B707275A224C00D03BAF /* Point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
+		45B2B708275A224C00D03BAF /* Robot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Robot.h; sourceTree = "<group>"; };
+		45B2B709275A224C00D03BAF /* Segment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
+		45B2B70A275A224C00D03BAF /* Angle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Angle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,12 +53,18 @@
 		45C5E5D327438E240071B47E = {
 			isa = PBXGroup;
 			children = (
-				45C5E5DF27438E240071B47E /* main.cpp */,
+				45B2B6FF275A220300D03BAF /* Classes */,
+				45B2B6FD275A220300D03BAF /* Graphing */,
+				45B2B6FE275A220300D03BAF /* main.cpp */,
+				45B2B70A275A224C00D03BAF /* Angle.h */,
+				45B2B707275A224C00D03BAF /* Point.h */,
+				45B2B708275A224C00D03BAF /* Robot.h */,
+				45B2B709275A224C00D03BAF /* Segment.h */,
+				45B2B703275A223400D03BAF /* pbPlots.cpp */,
+				45B2B701275A223400D03BAF /* pbPlots.hpp */,
+				45B2B702275A223400D03BAF /* supportLib.cpp */,
+				45B2B704275A223400D03BAF /* supportLib.hpp */,
 				457A19922758227B009BFFA7 /* Forward Kinematics */,
-				45184C8C27584B6700485E04 /* supportLib.cpp */,
-				45184C8D27584B6700485E04 /* supportLib.hpp */,
-				45184C8F27584B7300485E04 /* pbPlots.cpp */,
-				45184C9027584B7300485E04 /* pbPlots.hpp */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,9 +125,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45C5E5E027438E240071B47E /* main.cpp in Sources */,
-				45184C9127584B7300485E04 /* pbPlots.cpp in Sources */,
-				45184C8E27584B6700485E04 /* supportLib.cpp in Sources */,
+				45B2B700275A220300D03BAF /* main.cpp in Sources */,
+				45B2B706275A223400D03BAF /* pbPlots.cpp in Sources */,
+				45B2B705275A223400D03BAF /* supportLib.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
