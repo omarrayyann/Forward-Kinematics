@@ -13,10 +13,18 @@ class Robot{
     
 private:
     
-    int numberOfSegments = 0;
-public:
+    int numberOfSegments;
     Segment *segments = new Segment[0];
 
+public:
+    // default constructor
+    Robot(){
+        numberOfSegments = 0;
+    }
+    // non-default constructor
+    Robot(int n){
+        numberOfSegments = n;
+    }
     /* Functions */
     // Add Segment
     void addRootSegment(Point start, double l, Angle a){
@@ -45,6 +53,7 @@ public:
         segment = new Segment(segments[numberOfSegments-2], l, a);
         tempSegments[numberOfSegments-1] = *segment;
         tempSegments[numberOfSegments-1].setParentSegment(&tempSegments[numberOfSegments-2]);
+        delete [] segments;
         segments = tempSegments;
     }
     // Remove Segment
@@ -63,13 +72,21 @@ public:
         for (int i = n; i < numberOfSegments; i++){
             segments[i].updateSegment();
         }    }
+    // Change More than one Segment angl
+    void updateSegmentAngleArray(double *angleArray){
+        for (int b = 0; b < numberOfSegments; b++){
+        segments[b].setAngleRelativeToParentSegment(Angle(angleArray[b]));
+        for (int i = b; i < numberOfSegments; i++){
+            segments[i].updateSegment();
+        }}
+        
+    }
     // Change Length of Segment
     void updateSegmentLength(int n, double length){
         segments[n].setLength(length);
         for (int i = n; i < numberOfSegments; i++){
             segments[i].updateSegment();
         }
-        print();
     }
     // Get Segment
     Segment getSegment(int n){
@@ -88,7 +105,6 @@ public:
                 segments[i].setAngleRelativeToParentSegment(PI);}
             segments[i].updateSegment();
         }
-        print();
     }
     // Print All Segments
     void print(){
